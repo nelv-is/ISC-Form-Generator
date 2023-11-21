@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISC Report</title>
+
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+margin: 20px;
+}
+
+h2 {
+color: #333;
+text-align: center;
+}
+
+form {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+max-width: 600px;
+margin: 0 auto;
+}
+
+label {
+display: block;
+margin-bottom: 8px;
+}
+
+input,
+select,
+textarea {
+width: 100%;
+padding: 8px;
+margin-bottom: 16px;
+box-sizing: border-box;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+select {
+width: calc(100% + 2px); 
+}
+
+h3 {
+color: #333;
+margin-top: 20px;
+text-align: center;
+}
+
+h4 {
+color: #333;
+text-align: center;
+}
+
+textarea {
+width: 100%;
+}
+
+button {
+background-color: #4caf50;
+color: white;
+padding: 10px 15px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+}
+
+button:hover {
+background-color: #45a049;
+}
+
+#reportOutput {
+margin: 20px auto;
+padding: 20px;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+max-width: 600px;
+}
+
+#copyButton {
+background-color: #008CBA;
+color: white;
+padding: 10px 15px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+margin-top: 20px;
+}
+
+#copyButton:hover {
+background-color: #00688B;
+}
+</style>
+</head>
+
+<body>
+
+ 	<h2>ISC Form Generator</h2>
+
+    <form id="hostReportForm">
+
+        <label for="host">Your Discord ID:</label>
+        <input type="text" id="host" required>
+
+        <label for="timezone">Your Timezone:</label>
+        <input type="text" id="timezone" required>
+
+        <label for="attendees">Attendees:</label>
+        <input type="text" id="attendees" required>
+
+        <label for="passed">Passed:</label>
+        <input type="text" id="passed" required>
+
+        <label for="passers">Passers:</label>
+        <textarea id="passers" rows="4" required></textarea>
+
+        <label for="notes">Notes:</label>
+        <textarea id="notes" rows="4" required></textarea>
+
+<label for="rsm">RSM:</label>
+<select id="rsm">
+<option value="<@731261480858550305>">xenocurrencies (GMT)</option>
+<option value="<@922225288849530951>">ThatBreadCrumb (EST)</option>
+<option value="<@725568332715261992>">Ashznti (AEST)</option>
+
+</select>
+
+<label for="dxo">DXO:</label>
+<select id="dxo">
+<option value="<@1007072660020273173>">Random2007Hi (GMT)</option>
+<option value="<@326930030544289803>">ImpureAce (EST)</option>
+<option value="<@888633234668261446>">xXomq_tyllerXx (AEST)</option>
+
+</select>
+
+        <button type="button" onclick="generateReport()">GENERATE</button>
+    </form>
+
+<div id="reportOutput"></div>
+
+<script>
+function generateReport() {
+            var host = document.getElementById("host").value;
+            var timezone = document.getElementById("timezone").value;
+            var attendees = document.getElementById("attendees").value;
+            var passed = document.getElementById("passed").value;
+            var passers = document.getElementById("passers").value;
+            var notes = document.getElementById("notes").value;
+            var rsm = document.getElementById("rsm").value;
+            var dxo = document.getElementById("dxo").value;
+
+            var reportText = "Host: " + host + "\n";
+            reportText += "Timezone: " + timezone + "\n";
+            reportText += "Attendees: " + attendees + "\n";
+            reportText += "Passed: " + passed + "\n";
+            reportText += "Passers: " + passers + "\n";
+            reportText += "Notes: " + notes + "\n";
+            reportText += "RSM: " + rsm + "\n";
+            reportText += "DXO: " + dxo + "\n";
+            reportText += "Proof:\n";
+            
+            document.getElementById("reportOutput").innerText = reportText;
+            createCopyButton();
+        }
+</script>
+
+<script>
+function createCopyButton() {
+
+var copyButton = document.createElement("button");
+copyButton.id = "copyButton";
+copyButton.innerHTML = "COPY";
+copyButton.onclick = function () {
+copyToClipboard();
+};
+
+document.getElementById("reportOutput").appendChild(copyButton);
+}
+</script>
+
+<script>
+function copyToClipboard() {
+
+var reportText = document.getElementById("reportOutput").innerText;
+
+var reportWithoutCopyButton = reportText.replace("COPY", "");
+
+var tempTextArea = document.createElement("textarea");
+tempTextArea.value = reportWithoutCopyButton;
+
+document.body.appendChild(tempTextArea);
+
+tempTextArea.select();
+
+document.execCommand("copy");
+
+document.body.removeChild(tempTextArea);
+
+alert("Report text (excluding 'COPY') copied to clipboard!");
+}
+
+</script>
+
+</body>
+
+</html>
